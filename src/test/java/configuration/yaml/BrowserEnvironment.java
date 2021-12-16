@@ -6,15 +6,19 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import tests.LoginTest;
 
 public class BrowserEnvironment {
     private WebDriver driver;
+    Logger logger = LoggerFactory.getLogger(BrowserEnvironment.class);
 
     private YamlReader yamlReader;
 
     private String getBrowser() {
         yamlReader = new YamlReader();
-        System.out.println(yamlReader.getYamlConfig().getEnvironmentModel().choseActiveEnvironment().getBrowser());
+        logger.info("Running browser: {} ", yamlReader.getYamlConfig().getEnvironmentModel().choseActiveEnvironment().getBrowser());
         return yamlReader.getYamlConfig().getEnvironmentModel().choseActiveEnvironment().getBrowser();
     }
 
