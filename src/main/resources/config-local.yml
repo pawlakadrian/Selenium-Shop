@@ -5,7 +5,7 @@ environmentModel:
     active: N
     browser: chrome
   stag:
-    url: http://logback.qos.ch/
+    url: http://146.59.32.4/index.php
     title: Logback Home
     active: Y
     browser: firefox

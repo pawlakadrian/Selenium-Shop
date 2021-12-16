@@ -1,7 +1,7 @@
 package tests;
 
 import helpers.EmailGenerator;
-import helpers.BaseTest;
+import helpers.TestBase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,13 +14,8 @@ import pages.MenuPage;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
-public class RegisterTest extends BaseTest {
+public class RegisterTest extends TestBase {
     Logger logger = LoggerFactory.getLogger(RegisterTest.class);
-
-    @BeforeEach
-    public void openPage() {
-        driver.get("http://146.59.32.4/index.php");
-    }
 
     @Test
     @DisplayName("Register Test")
