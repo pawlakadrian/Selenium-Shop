@@ -1,4 +1,6 @@
-import Helpers.TestBase;
+package tests;
+
+import helpers.BaseTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,7 +12,7 @@ import pages.MenuPage;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
-public class LoginTest extends TestBase {
+public class LoginTest extends BaseTest {
     Logger logger = LoggerFactory.getLogger(LoginTest.class);
 
     @BeforeEach

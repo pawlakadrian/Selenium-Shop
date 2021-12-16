@@ -1,0 +1,7 @@
+environment:
+  test:
+    url: http://kotuszkowo.pl
+    title: Kotuszkowo- blog o kotach
+  stag:
+    url: http://logback.qos.ch/
+    title: Logback Home

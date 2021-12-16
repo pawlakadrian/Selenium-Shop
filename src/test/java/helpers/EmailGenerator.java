@@ -1,8 +1,8 @@
-package Helpers;
+package helpers;
 
 import java.util.Random;
 
-public class EmailGenerator extends TestBase{
+public class EmailGenerator extends BaseTest {
 
     public String generateEmail() {
         int leftLimit = 97; // letter 'a'

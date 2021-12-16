@@ -1,5 +1,7 @@
-import Helpers.EmailGenerator;
-import Helpers.TestBase;
+package tests;
+
+import helpers.EmailGenerator;
+import helpers.BaseTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -9,12 +11,10 @@ import pages.CreateAccountPage;
 import pages.LoginPage;
 import pages.MenuPage;
 
-import java.awt.*;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
-public class RegisterTest extends TestBase {
+public class RegisterTest extends BaseTest {
     Logger logger = LoggerFactory.getLogger(RegisterTest.class);
 
     @BeforeEach

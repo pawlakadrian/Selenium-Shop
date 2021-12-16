@@ -1,5 +1,6 @@
-package Helpers;
+package helpers;
 
+import configuration.yaml.BrowserEnvironment;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.AfterEach;
@@ -19,8 +20,9 @@ import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 
-public class TestBase {
-    private static Logger logger = LoggerFactory.getLogger(TestBase.class);
+public class BaseTest {
+    private static BrowserEnvironment browserEnvironment;
+    private static Logger logger = LoggerFactory.getLogger(BaseTest.class);
 
     protected WebDriver driver;
 
@@ -28,12 +30,14 @@ public class TestBase {
 
     @BeforeAll
     static void setDriver() {
+        browserEnvironment = new BrowserEnvironment();
         WebDriverManager.chromedriver().setup();
         logger.debug("Webdriver initialized");
     }
 
     @BeforeEach
     void setup() {
+        driver = browserEnvironment.getDriver();
         Map<String, Object> prefs = new HashMap<>();
         prefs.put("download.default_directory",  System.getProperty("user.dir")+ File.separator + "src" + File.separator + "download");
         options.setExperimentalOption("prefs", prefs);
