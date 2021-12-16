@@ -1,7 +1,11 @@
-environment:
+environmentModel:
   test:
     url: http://kotuszkowo.pl
     title: Kotuszkowo- blog o kotach
+    active: N
+    browser: chrome
   stag:
     url: http://logback.qos.ch/
     title: Logback Home
+    active: Y
+    browser: firefox

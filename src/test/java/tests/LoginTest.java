@@ -15,11 +15,6 @@ import static org.hamcrest.Matchers.equalTo;
 public class LoginTest extends BaseTest {
     Logger logger = LoggerFactory.getLogger(LoginTest.class);
 
-    @BeforeEach
-    public void openPage() {
-        driver.get("http://146.59.32.4/index.php");
-    }
-
     @Test
     @DisplayName("Failed login test")
     public void failedLogin() {

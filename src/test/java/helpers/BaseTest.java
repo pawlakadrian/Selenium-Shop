@@ -38,13 +38,6 @@ public class BaseTest {
     @BeforeEach
     void setup() {
         driver = browserEnvironment.getDriver();
-        Map<String, Object> prefs = new HashMap<>();
-        prefs.put("download.default_directory",  System.getProperty("user.dir")+ File.separator + "src" + File.separator + "download");
-        options.setExperimentalOption("prefs", prefs);
-        options.addArguments("start-maximized");
-        driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        logger.debug("Set properties to chrome driver");
     }
 
     @AfterEach
