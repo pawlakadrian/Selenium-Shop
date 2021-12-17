@@ -5,13 +5,18 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.nio.charset.Charset;
 import java.time.Duration;
 import java.util.*;
 
 public class BasePage {
+    private Logger logger = LoggerFactory.getLogger(BasePage.class);
+
     public BasePage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
@@ -37,5 +42,22 @@ public class BasePage {
         for (WebElement element : elements) {
             element.findElement(By.xpath("//label[contains(text(), '"+elementToSelect+"')]")).click();
         }
+    }
+
+    public void clickObject(WebElement element) {
+        element.click();
+        logger.info("Click on webelement {}", element);
+    }
+
+    public void sendKeysObject(WebElement webElement, String message) {
+        waitForWebElementToBeVisible(webElement);
+        webElement.clear();
+        webElement.sendKeys(message);
+        logger.info("Typed message {}", webElement.getText());
+    }
+
+    private void waitForWebElementToBeVisible(WebElement webElement) {
+        logger.info("Start waiting for Webelement to be visible- Timeout set to 10 seconds");
+        wait.until(ExpectedConditions.visibilityOf(webElement));
     }
 }

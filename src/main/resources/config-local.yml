@@ -3,9 +3,9 @@ environmentModel:
     url: http://kotuszkowo.pl
     title: Kotuszkowo- blog o kotach
     active: N
-    browser: chrome
+    browser: CHROME
   stag:
     url: http://146.59.32.4/index.php
     title: Logback Home
     active: Y
-    browser: firefox
+    browser: FIREFOX

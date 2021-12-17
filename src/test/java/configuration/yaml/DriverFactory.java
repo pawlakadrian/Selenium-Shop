@@ -8,24 +8,18 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import tests.LoginTest;
 
-public class BrowserEnvironment {
+import java.sql.SQLOutput;
+
+public class DriverFactory {
     private WebDriver driver;
-    Logger logger = LoggerFactory.getLogger(BrowserEnvironment.class);
+    Logger logger = LoggerFactory.getLogger(DriverFactory.class);
 
     private YamlReader yamlReader;
 
-    private String getBrowser() {
-        yamlReader = new YamlReader();
-        logger.info("Running browser: {} ", yamlReader.getYamlConfig().getEnvironmentModel().choseActiveEnvironment().getBrowser());
-        return yamlReader.getYamlConfig().getEnvironmentModel().choseActiveEnvironment().getBrowser();
-    }
-
-    public WebDriver getDriver() {
-
-        switch (getBrowser()) {
-            case "chrome":
+    public WebDriver getDriver(Browser browser) {
+        switch (browser.toString()) {
+            case "CHROME":
                 ChromeOptions optionsChrome = new ChromeOptions();
                 WebDriverManager.chromedriver().setup();
                 optionsChrome.addArguments("start-maximized");
@@ -35,7 +29,7 @@ public class BrowserEnvironment {
                 driver.get(url);
             break;
 
-            case "firefox":
+            case "FIREFOX":
                 FirefoxOptions optionsFirefox = new FirefoxOptions();
                 WebDriverManager.firefoxdriver().setup();
                 optionsFirefox.addArguments("start-maximized");
