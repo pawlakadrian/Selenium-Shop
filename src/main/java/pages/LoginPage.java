@@ -28,23 +28,31 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
+//    public LoginPage loginAction(WebElement emailInput, WebElement passwordInput, User user) {
+//        sendKeysObject(emailInput, emailInput);
+//        sendKeysObject(passwordInput, passwordInput);
+//        loginAction(emailInput, passwordInput, myUser);
+//        clickObject(logInButton);
+//        // dodać w yamlu
+//    }
+
     public LoginPage setEmail(String email) {
-        emailInput.sendKeys(email);
+        sendKeysObject(emailInput, email);
         return this;
     }
 
     public LoginPage setPassword(String password) {
-        passwordInput.sendKeys(password);
+        sendKeysObject(passwordInput, password);
         return this;
     }
 
     public LoginPage signIn() {
-        signInButton.click();
+        clickObject(signInButton);
         return this;
     }
 
     public LoginPage goToCreateAccount() {
-        createAccountButton.click();
+        clickObject(createAccountButton);
         return this;
     }
 

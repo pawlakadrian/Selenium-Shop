@@ -1,6 +1,8 @@
 package helpers;
 
-import configuration.yaml.BrowserEnvironment;
+import configuration.yaml.Browser;
+import configuration.yaml.DriverFactory;
+import configuration.yaml.YamlReader;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.AfterEach;
@@ -17,8 +19,10 @@ import java.io.File;
 import java.io.IOException;
 
 public class TestBase {
-    private static BrowserEnvironment browserEnvironment;
+    private static DriverFactory driverFactory;
     private static Logger logger = LoggerFactory.getLogger(TestBase.class);
+    private static YamlReader yamlReader;
+    private static Browser browser;
 
     protected WebDriver driver;
 
@@ -26,14 +30,16 @@ public class TestBase {
 
     @BeforeAll
     static void setDriver() {
-        browserEnvironment = new BrowserEnvironment();
+        yamlReader = new YamlReader();
+        browser = Browser.valueOf(yamlReader.getYamlConfig().getEnvironmentModel().choseActiveEnvironment().getBrowser());
+        driverFactory = new DriverFactory();
         WebDriverManager.chromedriver().setup();
         logger.debug("Webdriver initialized");
     }
 
     @BeforeEach
     void setup() {
-        driver = browserEnvironment.getDriver();
+        driver = driverFactory.getDriver(browser);
     }
 
     @AfterEach

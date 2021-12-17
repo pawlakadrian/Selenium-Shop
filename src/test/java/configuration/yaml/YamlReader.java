@@ -7,21 +7,21 @@ import java.io.File;
 import java.io.IOException;
 
 public class YamlReader {
-private YamlConfig yamlConfig;
+    private YamlConfig yamlConfig;
 
-   public YamlConfig getYamlConfig() {
-      return yamlConfig;
-   }
+    public YamlConfig getYamlConfig() {
+        return yamlConfig;
+    }
 
-   public YamlReader() {
-      ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
+    public YamlReader() {
+        ObjectMapper mapper = new ObjectMapper(new YAMLFactory());
 
-      mapper.findAndRegisterModules();
+        mapper.findAndRegisterModules();
 
-      try {
-         this.yamlConfig = mapper.readValue(new File("src/main/resources/config-local.yml"), YamlConfig.class);
-      } catch (IOException e) {
-         e.printStackTrace();
-      }
-   }
+        try {
+            this.yamlConfig = mapper.readValue(new File("src/main/resources/config-local.yml"), YamlConfig.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
