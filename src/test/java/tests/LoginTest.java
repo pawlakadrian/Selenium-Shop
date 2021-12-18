@@ -1,6 +1,7 @@
 package tests;
 
 import helpers.TestBase;
+import models.UserFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -24,8 +25,8 @@ public class LoginTest extends TestBase {
         LoginPage loginPage = new LoginPage(getDriver());
 
         loginPage
-                .setEmail("wrong@wp.pl")
-                .setPassword("passbad999")
+                .setEmail(System.getProperty("emailFailed"))
+                .setPassword(System.getProperty("passwordFailed"))
                 .signIn();
 
         String validationMsg = "Authentication failed.";
@@ -42,8 +43,8 @@ public class LoginTest extends TestBase {
                 .goToLoginPage();
 
         new LoginPage(getDriver())
-                .setEmail("randommail@gmail.com")
-                .setPassword("trudnehasł@997")
+                .setEmail(System.getProperty("emailSuccess"))
+                .setPassword(System.getProperty("passwordSuccess"))
                 .signIn();
 
         assertThat(menuPage.verifyUserIsLogged(), equalTo("Test User"));
