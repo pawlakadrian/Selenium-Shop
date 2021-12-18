@@ -18,6 +18,7 @@ public class DriverFactory {
     private YamlReader yamlReader;
 
     public WebDriver getDriver(Browser browser) {
+
         switch (browser.toString()) {
             case "CHROME":
                 ChromeOptions optionsChrome = new ChromeOptions();
@@ -25,7 +26,7 @@ public class DriverFactory {
                 optionsChrome.addArguments("start-maximized");
                 driver = new ChromeDriver(optionsChrome);
                 yamlReader = new YamlReader();
-                String url = yamlReader.getYamlConfig().getEnvironmentModel().choseActiveEnvironment().getUrl();
+                String url = System.getProperty("url");
                 driver.get(url);
             break;
 
@@ -35,7 +36,7 @@ public class DriverFactory {
                 optionsFirefox.addArguments("start-maximized");
                 driver = new FirefoxDriver(optionsFirefox);
                 yamlReader = new YamlReader();
-                String url1 = yamlReader.getYamlConfig().getEnvironmentModel().choseActiveEnvironment().getUrl();
+                String url1 = System.getProperty("url");
                 driver.get(url1);
             break;
         }

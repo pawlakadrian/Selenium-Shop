@@ -2,6 +2,7 @@ package helpers;
 
 import configuration.yaml.Browser;
 import configuration.yaml.DriverFactory;
+import configuration.yaml.LoadProperties;
 import configuration.yaml.YamlReader;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
@@ -23,6 +24,7 @@ public class TestBase {
     private static Logger logger = LoggerFactory.getLogger(TestBase.class);
     private static YamlReader yamlReader;
     private static Browser browser;
+    private static LoadProperties loadProperties;
 
     protected WebDriver driver;
 
@@ -30,6 +32,8 @@ public class TestBase {
 
     @BeforeAll
     static void setDriver() {
+        loadProperties = new LoadProperties();
+        loadProperties.setProperties();
         yamlReader = new YamlReader();
         browser = Browser.valueOf(yamlReader.getYamlConfig().getEnvironmentModel().choseActiveEnvironment().getBrowser());
         driverFactory = new DriverFactory();

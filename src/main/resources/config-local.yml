@@ -4,8 +4,24 @@ environmentModel:
     title: Kotuszkowo- blog o kotach
     active: N
     browser: CHROME
+
+    # data for failed login test
+    emailFailed: wrong@wp.pl
+    passwordFailed: passbad999
+
+    #data for successful login test
+    emailSuccess: randommail@gmail.com
+    passwordSuccess: trudnehasł@997
   stag:
     url: http://146.59.32.4/index.php
     title: Logback Home
     active: Y
     browser: FIREFOX
+
+    # data for failed login test
+    emailFailed: wrong@wp.pl
+    passwordFailed: passbad999
+
+    #data for successful login test
+    emailSuccess: randommail@gmail.com
+    passwordSuccess: trudnehasł@997

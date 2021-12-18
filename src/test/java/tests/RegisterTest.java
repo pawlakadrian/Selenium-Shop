@@ -2,6 +2,9 @@ package tests;
 
 import helpers.EmailGenerator;
 import helpers.TestBase;
+import models.User;
+import models.UserBuilder;
+import models.UserFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,6 +23,11 @@ public class RegisterTest extends TestBase {
     @Test
     @DisplayName("Register Test")
     public void registerTest() {
+        UserFactory newRandomUser = new UserFactory();
+        User user = newRandomUser.getRandomUser();
+
+        String userFirstName = user.getFirstName();
+        String userLastName = user.getLastName();
 
         MenuPage menuPage = new MenuPage(getDriver())
                 .goToLoginPage();
@@ -28,15 +36,17 @@ public class RegisterTest extends TestBase {
                 .goToCreateAccount();
 
         new CreateAccountPage(getDriver())
-                .setFirstName("RandomUser")
-                .setLastName("User")
-                .setEmail(new EmailGenerator().generateEmail())
-                .setPassword("randomPass888")
+
+                .setFirstName(userFirstName)
+                .setLastName(userLastName)
+                .setEmail(user.getEmail())
+                .setPassword(user.getPassword())
                 .setCutomerPrivacy()
                 .setPsgdpr()
                 .saveNewAccount();
 
-        assertThat(menuPage.verifyUserIsLogged(), equalTo("RandomUser User"));
+        assertThat(menuPage.verifyUserIsLogged(), equalTo(userFirstName +" "+ userLastName));
+        logger.info("User first name: {} and last name: {}", userFirstName, userLastName);
         logger.info("Test create new user was finished.");
     }
 }
