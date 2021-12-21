@@ -60,4 +60,12 @@ public class LoginTest extends TestBase {
         logger.info("Test Login with successful finished.");
 
     }
+
+    @Test
+    public void mouseHoverTest() {
+        new MenuPage(driver)
+                .mouseHoverClothes()
+                .mouseHoverAccessories()
+                .mouseHoverArt();
+    }
 }

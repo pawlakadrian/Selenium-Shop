@@ -3,7 +3,7 @@ environmentModel:
     url: http://kotuszkowo.pl
     title: Kotuszkowo- blog o kotach
     active: N
-    browser: CHROME
+    browser: FIREFOX
 
     # data for failed login test
     emailFailed: wrong@wp.pl
@@ -16,7 +16,7 @@ environmentModel:
     url: http://146.59.32.4/index.php
     title: Logback Home
     active: Y
-    browser: FIREFOX
+    browser: CHROME
 
     # data for failed login test
     emailFailed: wrong@wp.pl

@@ -1,8 +1,6 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -10,9 +8,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.nio.charset.Charset;
 import java.time.Duration;
-import java.util.*;
+import java.util.List;
+import java.util.Random;
 
 public class BasePage {
     private Logger logger = LoggerFactory.getLogger(BasePage.class);
@@ -40,12 +38,23 @@ public class BasePage {
 
     public void getOptionWithString(List<WebElement> elements, String elementToSelect) {
         for (WebElement element : elements) {
-            element.findElement(By.xpath("//label[contains(text(), '"+elementToSelect+"')]")).click();
+            element.findElement(By.xpath("//label[contains(text(), '" + elementToSelect + "')]")).click();
         }
     }
 
+    private void jsScrollIntoViewElement(WebElement element) {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
+    }
+
     public void clickObject(WebElement element) {
-        element.click();
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(element));
+            jsScrollIntoViewElement(element);
+            element.click();
+        } catch (TimeoutException e) {
+            e.printStackTrace();
+            logger.error("Element not found");
+        }
         logger.info("Click on webelement {}", element);
     }
 
