@@ -9,15 +9,15 @@ import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
+import java.util.Random;
 
 public class TestBase {
     private static DriverFactory driverFactory;
@@ -27,6 +27,7 @@ public class TestBase {
     private static LoadProperties loadProperties;
 
     protected WebDriver driver;
+    public Random rnd;
 
     static ChromeOptions options = new ChromeOptions();
 
@@ -64,5 +65,15 @@ public class TestBase {
 
     public WebDriver getDriver() {
         return driver;
+    }
+
+    public Object getRandomElement(List elements) {
+        System.out.println("elements.get(rnd.nextInt(elements.size()))" + elements.get(rnd.nextInt(elements.size())));
+        return elements.get(rnd.nextInt(elements.size()));
+    }
+
+    public int getRandomInt(int sizeOfList) {
+        rnd = new Random();
+        return rnd.nextInt(sizeOfList);
     }
 }
