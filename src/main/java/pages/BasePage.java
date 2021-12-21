@@ -42,7 +42,7 @@ public class BasePage {
         }
     }
 
-    private void jsScrollIntoViewElement(WebElement element) {
+    public void jsScrollIntoViewElement(WebElement element) {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
     }
 
