@@ -27,8 +27,7 @@ public class SearchTest extends TestBase {
 
         String randomProductName = listOfProducts.get(getRandomInt(listOfProducts.size())).getTitleOfProduct();
 
-        MenuPage menuPage = new MenuPage(driver);
-        menuPage
+        new MenuPage(driver)
                 .sendKeyToInputAndSearch(randomProductName);
 
         ListOfThumbnailsProductsPage listOfThumbnailsSearchPage = new ListOfThumbnailsProductsPage(driver);
@@ -37,6 +36,24 @@ public class SearchTest extends TestBase {
         String productNameOnSearchPage = listOfProductsOnSearchPage.get(0).getTitleOfProduct();
 
         assertThat(randomProductName, equalTo(productNameOnSearchPage));
+        logger.info("Search random product finished.");
+    }
+
+    @Test
+    @DisplayName("Test random product from dropdown")
+    public void searchRandomProductFromDropdown() {
+        ListOfThumbnailsProductsPage listOfThumbnailsProductsPage = new ListOfThumbnailsProductsPage(driver);
+
+        List<SingleThumbnailProductPage> listOfProducts = listOfThumbnailsProductsPage.getListOfProducts();
+
+        String randomProductName = listOfProducts.get(getRandomInt(listOfProducts.size())).getTitleOfProduct();
+
+        MenuPage menuPage = new MenuPage(driver);
+        menuPage
+                .sendKeyToInput(randomProductName)
+                .getHint();
+
+        assertThat(randomProductName, equalTo(menuPage.getHint()));
         logger.info("Search random product finished.");
     }
 }

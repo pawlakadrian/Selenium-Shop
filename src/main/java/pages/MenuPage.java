@@ -6,6 +6,7 @@ import org.openqa.selenium.interactions.Coordinates;
 import org.openqa.selenium.interactions.Locatable;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.events.internal.EventFiringMouse;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,6 +42,9 @@ public class MenuPage extends BasePage{
 
     @FindBy(css = "#category-9 > a")
     WebElement art;
+
+    @FindBy(css = ".ui-menu-item .product")
+    private WebElement searchHint;
 
     public MenuPage mouseHoverClothes() {
         logger.info("Mouse hover clothes link");
@@ -99,5 +103,15 @@ public class MenuPage extends BasePage{
         input.sendKeys(name);
         searchBtn.click();
         return this;
+    }
+
+    public MenuPage sendKeyToInput(String name) {
+        input.sendKeys(name);
+        return this;
+    }
+
+    public String getHint() {
+        wait.until(ExpectedConditions.visibilityOf(searchHint));
+        return searchHint.getText();
     }
 }
