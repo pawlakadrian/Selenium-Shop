@@ -1,5 +1,6 @@
 package pages;
 
+import helpers.ByFinder;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
@@ -68,5 +69,10 @@ public class BasePage {
     private void waitForWebElementToBeVisible(WebElement webElement) {
         logger.info("Start waiting for Webelement to be visible- Timeout set to 10 seconds");
         wait.until(ExpectedConditions.visibilityOf(webElement));
+    }
+
+    public void waitUntilElementIsVisible(WebElement element){
+        By byFromWebElement = new ByFinder().getByFromWebElement(element);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(byFromWebElement));
     }
 }

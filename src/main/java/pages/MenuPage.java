@@ -10,6 +10,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+
 public class MenuPage extends BasePage{
     Logger logger = LoggerFactory.getLogger(MenuPage.class);
 
@@ -45,6 +47,9 @@ public class MenuPage extends BasePage{
 
     @FindBy(css = ".ui-menu-item .product")
     private WebElement searchHint;
+
+    @FindBy(css = "#top-menu > li ")
+    private List<WebElement> categoryList;
 
     public MenuPage mouseHoverClothes() {
         logger.info("Mouse hover clothes link");
@@ -114,4 +119,12 @@ public class MenuPage extends BasePage{
         wait.until(ExpectedConditions.visibilityOf(searchHint));
         return searchHint.getText();
     }
+
+    public List<WebElement> getCategories() {
+        return categoryList;
+    }
+
+//    public MenuPage getEachSubCategory() {
+//
+//    }
 }
