@@ -10,6 +10,7 @@ public class CategoryPage extends BasePage{
     private WebElement title;
 
     public WebElement getTitle() {
+        waitUntilElementIsVisible(this.title);
         return this.title;
     }
 

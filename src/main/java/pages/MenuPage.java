@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
-public class MenuPage extends BasePage{
+public class MenuPage extends BasePage {
     Logger logger = LoggerFactory.getLogger(MenuPage.class);
 
     private EventFiringMouse eventFiringMouse;
@@ -48,7 +48,7 @@ public class MenuPage extends BasePage{
     @FindBy(css = ".ui-menu-item .product")
     private WebElement searchHint;
 
-    @FindBy(css = "#top-menu > li ")
+    @FindBy(css = "#top-menu > li")
     private List<WebElement> categoryList;
 
     public MenuPage mouseHoverClothes() {
@@ -123,8 +123,4 @@ public class MenuPage extends BasePage{
     public List<WebElement> getCategories() {
         return categoryList;
     }
-
-//    public MenuPage getEachSubCategory() {
-//
-//    }
 }

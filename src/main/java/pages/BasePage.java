@@ -71,7 +71,7 @@ public class BasePage {
         wait.until(ExpectedConditions.visibilityOf(webElement));
     }
 
-    public void waitUntilElementIsVisible(WebElement element){
+    public void waitUntilElementIsVisible(WebElement element) {
         By byFromWebElement = new ByFinder().getByFromWebElement(element);
         wait.until(ExpectedConditions.visibilityOfElementLocated(byFromWebElement));
     }

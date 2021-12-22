@@ -22,12 +22,13 @@ public class ProductAndCategoriesTest extends TestBase {
         MenuPage menuPage = new MenuPage(getDriver());
         CategoryPage categoryPage = new CategoryPage(getDriver());
 
-        for (WebElement category : menuPage.getCategories()) {
-            category.click();
-            logger.info("click on category {}", category);
+        for (int i = 0; i < menuPage.getCategories().size(); i++){
+            menuPage.getCategories().get(i).click();
+            logger.info("click on category {}", menuPage.getCategories().get(i));
+            menuPage.waitUntilElementIsVisible(categoryPage.getTitle());
             categoryPage.getTitle();
-            logger.info("get title from category {}", categoryPage.getTitle());
-            assertThat(category.getText(), equalTo(categoryPage.getTitle()));
+            logger.info("get title from category {}", categoryPage.getTitle().getText());
+            assertThat(menuPage.getCategories().get(i).getText(), equalTo(categoryPage.getTitle().getText()));
             logger.info("assert that clicked category is equal to category on page");
         }
     }
