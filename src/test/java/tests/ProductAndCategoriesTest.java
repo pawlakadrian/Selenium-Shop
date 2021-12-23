@@ -1,6 +1,7 @@
 package tests;
 
 import helpers.TestBase;
+import org.checkerframework.checker.units.qual.A;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebElement;
@@ -41,32 +42,23 @@ public class ProductAndCategoriesTest extends TestBase {
         MenuPage menuPage = new MenuPage(getDriver());
         FilterPage filterPage = new FilterPage(getDriver());
         ListOfThumbnailsProductsPage listOfThumbnailsProductsPage = new ListOfThumbnailsProductsPage(getDriver());
+        List<String> listOfProductWeExpected = new ArrayList<>();
+        listOfProductWeExpected.add("THE ADVENTURE POSTER");
+        listOfProductWeExpected.add("THE BEST IS YET POSTER");
+        listOfProductWeExpected.add("TODAY POSTER");
 
-        List<SingleThumbnailProductPage> filteredArts = new ArrayList<>();
-        List<String> filteredArts40x60 = new ArrayList<>(Arrays.asList("THE ADVENTURE POSTER", "THE BEST IS YET POSTER", "TODAY POSTER"));
-        List<String> filteredArts60x90 = new ArrayList<>(Arrays.asList("THE ADVENTURE POSTER", "THE BEST IS YET POSTER", "TODAY POSTER"));
-        List<String> filteredArts80x120 = new ArrayList<>(Arrays.asList("THE ADVENTURE POSTER", "THE BEST IS YET POSTER", "TODAY POSTER"));
-
-
+        List<String> listOfProductWeDisplay = new ArrayList<>();
 
         menuPage
                 .goToArt();
-        for (int i = 0; i < filterPage.availableFilters().size(); i++) {
-            filterPage.availableFilters().get(i).click(); //click on 40x60 filter
-
-            filteredArts.add(listOfThumbnailsProductsPage.getListOfProducts());
-            System.out.println(filteredArts40x60);
-            System.out.println("filteredArts" + filteredArts);
-            assertThat(filteredArts, equalTo(filteredArts40x60));
+        filterPage
+                .selectFilterFirst();
+        for (SingleThumbnailProductPage listOfProduct : listOfThumbnailsProductsPage.getListOfProducts()) {
+            logger.info("Searched products by filter: {}", listOfProduct.getTitleOfProduct());
+            listOfProductWeDisplay.add(listOfProduct.getTitleOfProduct());
         }
-
-//
-//        filterPage
-//                .selectFilterFirst();
-//        for (SingleThumbnailProductPage listOfProduct : listOfThumbnailsProductsPage.getListOfProducts()) {
-//            logger.info("Searched products by filter: {}", listOfProduct.getTitleOfProduct());
-//        }
-//        filterPage
-//                .clearFilters();
+        assertThat(listOfProductWeDisplay, equalTo(listOfProductWeExpected));
+        filterPage
+                .clearFilters();
     }
 }
