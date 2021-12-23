@@ -69,6 +69,12 @@ public class MenuPage extends BasePage {
         return this;
     }
 
+    public MenuPage goToArt() {
+        logger.info("Go to art category");
+        clickObject(art);
+        return this;
+    }
+
     private void mouseHover(WebElement webElement) {
         eventFiringMouse = new EventFiringMouse(driver, webListener);
         Locatable item = (Locatable) webElement;
