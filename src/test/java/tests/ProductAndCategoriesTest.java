@@ -61,4 +61,28 @@ public class ProductAndCategoriesTest extends TestBase {
         filterPage
                 .clearFilters();
     }
+
+    @Test
+    @DisplayName("Prices drop test")
+    public void priceDropTests() {
+        FooterPage footerPage = new FooterPage(getDriver());
+        OnSalePage onSalePage = new OnSalePage(getDriver());
+        ListOfThumbnailsProductsPage listOfThumbnailsProductsPage = new ListOfThumbnailsProductsPage(getDriver());
+
+        footerPage
+                .goToOnSale();
+        onSalePage
+                .getTitle();
+        assertThat(onSalePage.getTitle(), equalTo("ON SALE"));
+
+        for (SingleThumbnailProductPage listOfProduct : listOfThumbnailsProductsPage.getListOfProducts()) {
+            logger.info("List of products with discount: {}", listOfProduct.getTitleOfProduct());
+            assertThat(listOfProduct.isDiscount(), equalTo(true));
+            assertThat(listOfProduct.isRegularPrice(), equalTo(true));
+            assertThat(listOfProduct.isDiscountPrice(), equalTo(true));
+            assertThat(listOfProduct.checkPriceWithDiscount(), equalTo(true));
+        }
+        logger.info("Assertion checked all item has a discount sign, regular and discount price");
+
+    }
 }

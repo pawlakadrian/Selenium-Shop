@@ -50,7 +50,6 @@ public class BasePage {
     public void clickObject(WebElement element) {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(element));
-            jsScrollIntoViewElement(element);
             element.click();
         } catch (TimeoutException e) {
             e.printStackTrace();
