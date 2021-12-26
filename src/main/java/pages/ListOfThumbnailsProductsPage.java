@@ -31,4 +31,9 @@ public class ListOfThumbnailsProductsPage {
         Random rnd = new Random();
         return getListOfProducts().get(rnd.nextInt(getListOfProducts().size()));
     }
+
+    public void goToRandomProduct() {
+        Random rnd = new Random();
+        listOfProducts.get(rnd.nextInt(getListOfProducts().size())).click();
+    }
 }

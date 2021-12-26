@@ -68,6 +68,7 @@ public class ProductAndCategoriesTest extends TestBase {
         FooterPage footerPage = new FooterPage(getDriver());
         OnSalePage onSalePage = new OnSalePage(getDriver());
         ListOfThumbnailsProductsPage listOfThumbnailsProductsPage = new ListOfThumbnailsProductsPage(getDriver());
+        ProductPage productPage = new ProductPage(getDriver());
 
         footerPage
                 .goToOnSale();
@@ -82,7 +83,13 @@ public class ProductAndCategoriesTest extends TestBase {
             assertThat(listOfProduct.isDiscountPrice(), equalTo(true));
             assertThat(listOfProduct.checkPriceWithDiscount(), equalTo(true));
         }
-        logger.info("Assertion checked all item has a discount sign, regular and discount price");
+        logger.info("Assertion checked all item has a discount sign, regular and discount price.");
 
+        listOfThumbnailsProductsPage
+                .goToRandomProduct();
+        productPage
+                .isDisplayDiscountLabel();
+        assertThat(productPage.isDisplayDiscountLabel(), equalTo(true));
+        logger.info("Assertion checked label discount on product page.");
     }
 }
