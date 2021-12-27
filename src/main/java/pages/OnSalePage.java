@@ -4,17 +4,17 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class CategoryPage extends BasePage{
+public class OnSalePage extends BasePage{
 
-    @FindBy (css = ".block-category h1")
+    @FindBy (id="js-product-list-header")
     private WebElement title;
 
-    public WebElement getTitle() {
+    public String getTitle() {
         waitUntilElementIsVisible(this.title);
-        return this.title;
+        return this.title.getText();
     }
 
-    public CategoryPage(WebDriver driver) {
+    public OnSalePage(WebDriver driver) {
         super(driver);
     }
 }
