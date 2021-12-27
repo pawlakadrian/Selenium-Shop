@@ -91,5 +91,12 @@ public class ProductAndCategoriesTest extends TestBase {
                 .isDisplayDiscountLabel();
         assertThat(productPage.isDisplayDiscountLabel(), equalTo(true));
         logger.info("Assertion checked label discount on product page.");
+
+        assertThat(productPage.isDiscountPrice(), equalTo(true));
+        assertThat(productPage.isRegularPrice(), equalTo(true));
+        logger.info("Assertion checked two prices (discount + regular) on product page.");
+
+        assertThat(productPage.checkPriceWithDiscount(), equalTo(true));
+        logger.info("Assertion checked actual price is 20% lower than regular");
     }
 }
