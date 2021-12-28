@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
+import java.util.Random;
 
 public class MenuPage extends BasePage {
     Logger logger = LoggerFactory.getLogger(MenuPage.class);
@@ -128,5 +129,15 @@ public class MenuPage extends BasePage {
 
     public List<WebElement> getCategories() {
         return categoryList;
+    }
+
+    public MenuPage goToRandomCategory() {
+        clickObject(getRandomElement(categoryList));
+        return this;
+    }
+
+    public MenuPage goToClothes() {
+        clickObject(clothes);
+        return this;
     }
 }

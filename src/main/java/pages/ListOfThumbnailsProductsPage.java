@@ -9,9 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class ListOfThumbnailsProductsPage {
+public class ListOfThumbnailsProductsPage extends BasePage{
 
     public ListOfThumbnailsProductsPage(WebDriver driver) {
+        super(driver);
         PageFactory.initElements(driver, this);
     }
 
@@ -34,6 +35,6 @@ public class ListOfThumbnailsProductsPage {
 
     public void goToRandomProduct() {
         Random rnd = new Random();
-        listOfProducts.get(rnd.nextInt(getListOfProducts().size())).click();
+        clickObject(listOfProducts.get(rnd.nextInt(getListOfProducts().size())));
     }
 }

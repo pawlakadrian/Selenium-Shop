@@ -65,7 +65,7 @@ public class BasePage {
         logger.info("Typed message {}", webElement.getText());
     }
 
-    private void waitForWebElementToBeVisible(WebElement webElement) {
+    public void waitForWebElementToBeVisible(WebElement webElement) {
         logger.info("Start waiting for Webelement to be visible- Timeout set to 10 seconds");
         wait.until(ExpectedConditions.visibilityOf(webElement));
     }
