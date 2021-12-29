@@ -71,7 +71,6 @@ public class TestBase {
     }
 
     public Object getRandomElement(List elements) {
-        System.out.println("elements.get(rnd.nextInt(elements.size()))" + elements.get(rnd.nextInt(elements.size())));
         return elements.get(rnd.nextInt(elements.size()));
     }
 

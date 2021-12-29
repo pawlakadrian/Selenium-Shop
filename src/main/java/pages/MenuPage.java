@@ -11,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
-import java.util.Random;
 
 public class MenuPage extends BasePage {
     Logger logger = LoggerFactory.getLogger(MenuPage.class);
@@ -51,6 +50,14 @@ public class MenuPage extends BasePage {
 
     @FindBy(css = "#top-menu > li")
     private List<WebElement> categoryList;
+
+    @FindBy(css = ".cart-products-count")
+    private WebElement menuCartCounter;
+
+    public String getCartCounter() {
+        String cartCounter = menuCartCounter.getText().replaceAll("\\p{P}", "");
+        return cartCounter;
+    }
 
     public MenuPage mouseHoverClothes() {
         logger.info("Mouse hover clothes link");

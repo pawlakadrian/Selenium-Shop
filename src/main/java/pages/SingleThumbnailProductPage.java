@@ -30,11 +30,11 @@ public class SingleThumbnailProductPage {
     public Boolean checkPriceWithDiscount() {
         double discountPercent = 0.2;
         BigDecimal decimalDiscountPercent = new BigDecimal(Double.toString(discountPercent));
-        BigDecimal regularPriceConvert = new BigDecimal(regularPrice.getText().replace("zł", "")).setScale(2, RoundingMode.HALF_UP);
-        BigDecimal discountPriceConvert = new BigDecimal(discountPrice.getText().replace("zł", "")).setScale(2, RoundingMode.HALF_UP);
+        BigDecimal regularPriceConvert = new BigDecimal(regularPrice.getText().replace("zł", "")).setScale(2);
+        BigDecimal discountPriceConvert = new BigDecimal(discountPrice.getText().replace("zł", "")).setScale(2);
         BigDecimal amountOfDiscount = new BigDecimal(String.valueOf(regularPriceConvert.multiply(decimalDiscountPercent)));
         BigDecimal calcPriceWithDiscount = regularPriceConvert.subtract(amountOfDiscount);
-        calcPriceWithDiscount = calcPriceWithDiscount.setScale(2, RoundingMode.HALF_UP);
+        calcPriceWithDiscount = calcPriceWithDiscount.setScale(2);
         return calcPriceWithDiscount.compareTo(discountPriceConvert) == 0;
     }
 

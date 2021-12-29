@@ -17,7 +17,7 @@ public class BasketLine {
         this.totalOrderBasket = product.getPrice().multiply(BigDecimal.valueOf(quantity));
     }
 
-    public void addQuantity(int quantity) {
-        this.setQuantity(this.getQuantity() + quantity);
+    public void updateTotalOrderBasket() {
+        this.totalOrderBasket = product.getPrice().multiply(BigDecimal.valueOf(getQuantity()));
     }
 }

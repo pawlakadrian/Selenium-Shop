@@ -6,10 +6,11 @@ import models.Product;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ProductPage extends BasePage {
 
@@ -83,22 +84,38 @@ public class ProductPage extends BasePage {
     public Boolean checkPriceWithDiscount() {
         double discountPercent = 0.2;
         BigDecimal decimalDiscountPercent = new BigDecimal(Double.toString(discountPercent));
-        BigDecimal regularPriceConvert = new BigDecimal(regularPrice.getText().replace("zł", "")).setScale(2, RoundingMode.HALF_UP);
-        BigDecimal discountPriceConvert = new BigDecimal(discountPrice.getText().replace("zł", "")).setScale(2, RoundingMode.HALF_UP);
+        BigDecimal regularPriceConvert = new BigDecimal(regularPrice.getText().replace("zł", "")).setScale(2);
+        BigDecimal discountPriceConvert = new BigDecimal(discountPrice.getText().replace("zł", "")).setScale(2);
         BigDecimal amountOfDiscount = new BigDecimal(String.valueOf(regularPriceConvert.multiply(decimalDiscountPercent)));
         BigDecimal calcPriceWithDiscount = regularPriceConvert.subtract(amountOfDiscount);
-        calcPriceWithDiscount = calcPriceWithDiscount.setScale(2, RoundingMode.HALF_UP);
+        calcPriceWithDiscount = calcPriceWithDiscount.setScale(2);
         return calcPriceWithDiscount.compareTo(discountPriceConvert) == 0;
     }
 
-    public ProductPage addProductToBasket(Basket expectedBasket) {
+    public ProductPage addProductToBasket(Basket expectedBasket, int quantity) {
         Product product = new Product();
         product.setName(getProductName());
         product.setPrice(getProductPrice());
-        int productOrderQuantity = getQuantity();
-        BasketLine newBasketLine = new BasketLine(product, productOrderQuantity);
+        BasketLine newBasketLine = new BasketLine(product, quantity);
 
         expectedBasket.addBasketLine(newBasketLine);
+        newBasketLine.updateTotalOrderBasket();
         return this;
+    }
+
+    public List<BasketLine> getLastElementAddedToBasket(Basket expectedBasket, String productName) {
+        List<BasketLine> filteredProduct = expectedBasket.getBasketLine()
+                .stream()
+                .filter(pn -> pn.getProduct().getName().contains(productName))
+                .collect(Collectors.toList());
+        return filteredProduct;
+    }
+
+    public int getAllElementsInCart(Basket expectedBasket) {
+        int allItemsInCart = 0;
+        for (BasketLine basketLine : expectedBasket.getBasketLine()) {
+            allItemsInCart += basketLine.getQuantity();
+        }
+        return allItemsInCart;
     }
 }

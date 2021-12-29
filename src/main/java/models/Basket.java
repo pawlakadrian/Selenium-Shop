@@ -26,7 +26,8 @@ public class Basket {
     public void addBasketLine(BasketLine newBasketLine) {
         for (BasketLine line : basketLine) {
             if(line.getProduct().getName().equals(newBasketLine.getProduct().getName())) {
-                line.addQuantity(newBasketLine.getQuantity());
+                line.setQuantity(line.getQuantity() + newBasketLine.getQuantity());
+                line.setTotalOrderBasket(BigDecimal.valueOf(line.getQuantity()).multiply(line.getProduct().getPrice()));
                 updateTotalPrice();
                 return;
             }

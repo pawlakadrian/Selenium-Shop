@@ -39,8 +39,9 @@ public class PopupProductPage extends BasePage{
         return regularPriceConvert;
     }
 
-    public String getItemsInCart() {
-        return thereAreXItems.getText();
+    public int getItemsInCart() {
+        int itemsInCart = Integer.parseInt(thereAreXItems.getText().replaceAll( "[^0-9]",""));
+        return itemsInCart;
     }
 
     public int getQuantity() {
