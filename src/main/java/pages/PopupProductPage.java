@@ -35,7 +35,7 @@ public class PopupProductPage extends BasePage{
     }
 
     public BigDecimal getTotalValue() {
-        BigDecimal regularPriceConvert = new BigDecimal(totalValue.getText().replace("zł", "")).setScale(2);
+        BigDecimal regularPriceConvert = new BigDecimal(totalValue.getText().replace("$", "")).setScale(2);
         return regularPriceConvert;
     }
 
@@ -49,7 +49,7 @@ public class PopupProductPage extends BasePage{
     }
 
     public BigDecimal getPrice() {
-        BigDecimal regularPriceConvert = new BigDecimal(productPrice.getText().replace("zł", "")).setScale(2);
+        BigDecimal regularPriceConvert = new BigDecimal(productPrice.getText().replace("$", "")).setScale(2);
         return regularPriceConvert;
     }
 

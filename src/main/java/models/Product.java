@@ -9,4 +9,9 @@ public class Product {
 
     private String name;
     private BigDecimal price;
+
+    public Product(String productName, BigDecimal productPrice) {
+        this.name = productName;
+        this.price = productPrice;
+    }
 }

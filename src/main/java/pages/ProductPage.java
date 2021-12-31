@@ -84,8 +84,8 @@ public class ProductPage extends BasePage {
     public Boolean checkPriceWithDiscount() {
         double discountPercent = 0.2;
         BigDecimal decimalDiscountPercent = new BigDecimal(Double.toString(discountPercent));
-        BigDecimal regularPriceConvert = new BigDecimal(regularPrice.getText().replace("zł", "")).setScale(2);
-        BigDecimal discountPriceConvert = new BigDecimal(discountPrice.getText().replace("zł", "")).setScale(2);
+        BigDecimal regularPriceConvert = new BigDecimal(regularPrice.getText().replace("$", "")).setScale(2);
+        BigDecimal discountPriceConvert = new BigDecimal(discountPrice.getText().replace("$", "")).setScale(2);
         BigDecimal amountOfDiscount = new BigDecimal(String.valueOf(regularPriceConvert.multiply(decimalDiscountPercent)));
         BigDecimal calcPriceWithDiscount = regularPriceConvert.subtract(amountOfDiscount);
         calcPriceWithDiscount = calcPriceWithDiscount.setScale(2);
@@ -93,9 +93,9 @@ public class ProductPage extends BasePage {
     }
 
     public ProductPage addProductToBasket(Basket expectedBasket, int quantity) {
-        Product product = new Product();
-        product.setName(getProductName());
-        product.setPrice(getProductPrice());
+        Product product = new Product(getProductName(), getProductPrice());
+//        product.setName(getProductName());
+//        product.setPrice(getProductPrice());
         BasketLine newBasketLine = new BasketLine(product, quantity);
 
         expectedBasket.addBasketLine(newBasketLine);

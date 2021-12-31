@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.math.BigDecimal;
 import java.time.Duration;
 import java.util.List;
 import java.util.Random;
@@ -73,5 +74,32 @@ public class BasePage {
     public void waitUntilElementIsVisible(WebElement element) {
         By byFromWebElement = new ByFinder().getByFromWebElement(element);
         wait.until(ExpectedConditions.visibilityOfElementLocated(byFromWebElement));
+    }
+
+    public BigDecimal getPriceAsBigDecimal(WebElement element) {
+        return new BigDecimal(element.getText().replace("$", "")).setScale(2);
+    }
+
+    public void retryingFindClick(WebElement webElement) {
+        int attempts = 0;
+        while(attempts < 2) {
+            try {
+                webElement.click();
+                break;
+            } catch(StaleElementReferenceException e) {
+            }
+            attempts++;
+        }
+    }
+
+    public Boolean elementIsNotVisible(WebElement element) {
+        try {
+            element.isDisplayed();
+            return false;
+        } catch (NoSuchElementException e) {
+            return true;
+        } catch (StaleElementReferenceException f) {
+            return true;
+        }
     }
 }

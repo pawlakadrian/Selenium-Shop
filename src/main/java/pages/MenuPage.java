@@ -54,6 +54,14 @@ public class MenuPage extends BasePage {
     @FindBy(css = ".cart-products-count")
     private WebElement menuCartCounter;
 
+    @FindBy(css = ".header a")
+    private WebElement cart;
+
+    public MenuPage goToCartPage() {
+        clickObject(cart);
+        return this;
+    }
+
     public String getCartCounter() {
         String cartCounter = menuCartCounter.getText().replaceAll("\\p{P}", "");
         return cartCounter;
