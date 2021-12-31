@@ -2,6 +2,7 @@ package tests;
 
 import helpers.TestBase;
 import models.Basket;
+import models.UserFactory;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -120,5 +121,31 @@ public class BasketAndCheckoutTest extends TestBase {
             expectedBasket.getBasketLine().remove(index);
             soft.assertThat(expectedBasket.getTotalOrderPrice()).isEqualTo(shoppingCartPage.getTotalValueOfShoppingCart());
         }
+    }
+
+    @Test
+    @DisplayName("Checkout")
+    public void checkoutTest() {
+        ListOfThumbnailsProductsPage listOfThumbnailsProductsPage = new ListOfThumbnailsProductsPage(getDriver());
+        MenuPage menuPage = new MenuPage(getDriver());
+        ProductPage productPage = new ProductPage(getDriver());
+        ShoppingCartPage shoppingCartPage = new ShoppingCartPage(getDriver());
+        LoginPage loginPage = new LoginPage(getDriver());
+        CreateAccountPage createAccountPage = new CreateAccountPage(getDriver());
+        UserFactory userFactory = new UserFactory();
+
+        SoftAssertions soft = new SoftAssertions();
+
+        Basket expectedBasket = new Basket();
+
+        menuPage
+                .goToLoginPage();
+        loginPage
+                .goToCreateAccount();
+//        createAccountPage
+//                .setFirstName(userFactory.getRandomUser())
+//                .setLastName()
+//                .setPsgdpr()
+//                .setCutomerPrivacy();
     }
 }
