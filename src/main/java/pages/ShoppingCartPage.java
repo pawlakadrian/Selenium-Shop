@@ -22,6 +22,14 @@ public class ShoppingCartPage extends BasePage{
     @FindBy(css = ".product-line-info a.label")
     private WebElement getName;
 
+    @FindBy(css = ".checkout a")
+    private WebElement goToProceed;
+
+    public ShoppingCartPage goToProceed() {
+        clickObject(goToProceed);
+        return this;
+    }
+
     public BigDecimal getTotalValueOfShoppingCart() {
         BigDecimal totalValue = new BigDecimal(totalValueShoppingCart.getText().replace("$", ""));
         return totalValue;

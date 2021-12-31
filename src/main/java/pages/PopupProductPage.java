@@ -26,8 +26,16 @@ public class PopupProductPage extends BasePage{
     @FindBy(css = ".btn-secondary")
     private WebElement continueShoppingBtn;
 
+    @FindBy(css = ".cart-content-btn a")
+    private WebElement proceedToCheckout;
+
     @FindBy(css = "#blockcart-modal")
     private WebElement popup;
+
+    public PopupProductPage proceedToCheckout() {
+        clickObject(proceedToCheckout);
+        return this;
+    }
 
     public PopupProductPage continueShopping() {
         clickObject(continueShoppingBtn);

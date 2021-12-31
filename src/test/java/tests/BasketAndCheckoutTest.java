@@ -2,6 +2,7 @@ package tests;
 
 import helpers.TestBase;
 import models.Basket;
+import models.User;
 import models.UserFactory;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.DisplayName;
@@ -35,7 +36,7 @@ public class BasketAndCheckoutTest extends TestBase {
                     .goToRandomProduct();
             logger.info("Choose random product.");
 
-            int randomQuantity = getRandomInt(4) + 1;
+            int randomQuantity = getRandomInt(5) + 1;
 
             productPage
                     .chooseQuantity(randomQuantity);
@@ -81,7 +82,7 @@ public class BasketAndCheckoutTest extends TestBase {
                     .goToRandomProduct();
             logger.info("Choose random product.");
 
-            int randomQuantity = getRandomInt(4) + 1;
+            int randomQuantity = getRandomInt(5) + 1;
 
             productPage
                     .chooseQuantity(randomQuantity);
@@ -133,6 +134,14 @@ public class BasketAndCheckoutTest extends TestBase {
         LoginPage loginPage = new LoginPage(getDriver());
         CreateAccountPage createAccountPage = new CreateAccountPage(getDriver());
         UserFactory userFactory = new UserFactory();
+        UserFactory newRandomUser = new UserFactory();
+        User user = newRandomUser.getRandomUser();
+        AddressesFormPage addressesFormPage = new AddressesFormPage(getDriver());
+        ShippingFormPage shippingFormPage = new ShippingFormPage(getDriver());
+        PaymentPage paymentPage = new PaymentPage(getDriver());
+
+        String userFirstName = user.getFirstName();
+        String userLastName = user.getLastName();
 
         SoftAssertions soft = new SoftAssertions();
 
@@ -142,10 +151,58 @@ public class BasketAndCheckoutTest extends TestBase {
                 .goToLoginPage();
         loginPage
                 .goToCreateAccount();
-//        createAccountPage
-//                .setFirstName(userFactory.getRandomUser())
-//                .setLastName()
-//                .setPsgdpr()
-//                .setCutomerPrivacy();
+        new CreateAccountPage(getDriver())
+
+                .setFirstName(userFirstName)
+                .setLastName(userLastName)
+                .setEmail(user.getEmail())
+                .setPassword(user.getPassword())
+                .setCutomerPrivacy()
+                .setPsgdpr()
+                .saveNewAccount();
+
+        for (int i = 0; i < 5; i++) {
+            menuPage
+                    .goToRandomCategory();
+//                    .goToClothes(); //uncomment for debug, comment line above
+            logger.info("Go to random category");
+
+            listOfThumbnailsProductsPage
+                    .goToRandomProduct();
+            logger.info("Choose random product.");
+
+            int randomQuantity = getRandomInt(3) + 1;
+
+            productPage
+                    .chooseQuantity(randomQuantity);
+
+            productPage
+                    .addProductToBasket(expectedBasket, randomQuantity)
+                    .addToCart();
+
+            PopupProductPage popupProductPage = new PopupProductPage(getDriver());
+            popupProductPage.goToPopup();
+            if (i == 4) {
+                popupProductPage.proceedToCheckout();
+            } else {
+                popupProductPage.continueShopping();
+            }
+            shoppingCartPage.goToProceed();
+            addressesFormPage
+                    .setAddress()
+                    .setCity()
+                    .setPostcode()
+                    .setCountry()
+                    .confirmAddresses();
+            shippingFormPage
+                    .chooseShippingMethod()
+                    .continueForm();
+            paymentPage
+                    .selectPaymentBankWire()
+                    .selectTherms()
+                    .placeOrder();
+
+            System.out.println(expectedBasket);
+        }
     }
 }
