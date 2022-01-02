@@ -2,6 +2,7 @@ package pages;
 
 import com.github.javafaker.Faker;
 import com.github.javafaker.service.RandomService;
+import models.OrderDetails;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -30,29 +31,43 @@ public class AddressesFormPage extends BasePage{
             new Locale("pl-PL"), new RandomService()
     );
 
+    OrderDetails orderDetails = new OrderDetails();
+
+    public OrderDetails getOrderDetails() {
+        return orderDetails;
+    }
+
     public AddressesFormPage setCountry() {
         Select country = new Select(selectCountry);
         country.selectByVisibleText("Poland");
+        orderDetails.setCountry("Poland");
         return this;
     }
 
     public AddressesFormPage setAddress() {
-        addressInput.sendKeys(faker.letterify("???????"));
+        String address = faker.letterify("???????");
+        addressInput.sendKeys(address);
+        orderDetails.setAddress(address);
         return this;
     }
 
     public AddressesFormPage confirmAddresses() {
+        waitForWebElementToBeVisible(continueBtn);
         clickObject(continueBtn);
         return this;
     }
 
     public AddressesFormPage setPostcode() {
-        postcodeInput.sendKeys(faker.numerify("??-???"));
+        String postCode = faker.numerify("##-###");
+        postcodeInput.sendKeys(postCode);
+        orderDetails.setZipCode(postCode);
         return this;
     }
 
     public AddressesFormPage setCity() {
-        cityInput.sendKeys(faker.letterify("???????"));
+        String city = faker.letterify("???????");
+        cityInput.sendKeys(city);
+        orderDetails.setCity(city);
         return this;
     }
 

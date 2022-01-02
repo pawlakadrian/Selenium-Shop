@@ -1,8 +1,6 @@
 package pages;
 
 import models.Basket;
-import models.BasketLine;
-import models.Product;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -50,16 +48,8 @@ public class ShoppingCartPage extends BasePage{
         for (ShoppingLineCartPage shoppingLineCartPage : getListOfProductsInCart()) {
             basket.addBasketLine(shoppingLineCartPage.createBasketLine());
         }
-        System.out.println("basket " + basket);
         return basket;
     }
-
-//    public Boolean customWait(int list) {
-//        while (list == list-1){
-//            return true;
-//        }
-//        return false;
-//    }
 
     public ShoppingCartPage getProductsFromCart() {
         System.out.println("productsListOnCart " + productsListOnCart);

@@ -6,7 +6,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 public class SingleThumbnailProductPage {
 

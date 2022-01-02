@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class PaymentPage extends BasePage {
 
-    @FindBy(css = "#payment-option-2-container")
+    @FindBy(css = "#payment-option-2")
     private WebElement payByBankWire;
 
     @FindBy(css = ".custom-checkbox")
@@ -26,7 +26,7 @@ public class PaymentPage extends BasePage {
     }
 
     public PaymentPage selectPaymentBankWire() {
-        clickObject(payByBankWire);
+        payByBankWire.click();
         return this;
     }
 

@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ShippingFormPage extends BasePage{
 
-    @FindBy(css = ".delivery-option")
+    @FindBy(css = ".delivery-option .carrier-name")
     private List<WebElement> shippingMethod;
 
     @FindBy(css = ".continue[name='confirmDeliveryOption']")
@@ -18,9 +18,11 @@ public class ShippingFormPage extends BasePage{
         super(driver);
     }
 
-    public ShippingFormPage chooseShippingMethod() {
-        clickObject(getRandomElement(shippingMethod));
-        return this;
+    public WebElement choseShippingMethod() {
+        WebElement chosenShippingMethod;
+        chosenShippingMethod = getRandomElement(shippingMethod);
+        clickObject(chosenShippingMethod);
+        return chosenShippingMethod;
     }
 
     public ShippingFormPage continueForm() {
