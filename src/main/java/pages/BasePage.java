@@ -5,6 +5,8 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +15,7 @@ import java.math.BigDecimal;
 import java.time.Duration;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class BasePage {
     private Logger logger = LoggerFactory.getLogger(BasePage.class);
@@ -20,13 +23,19 @@ public class BasePage {
     public BasePage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+
+        wait = new FluentWait(driver)
+                .withTimeout(Duration.ofSeconds(16))
+                .pollingEvery(Duration.ofSeconds(2))
+                .ignoring(NoSuchElementException.class);
+
         actions = new Actions(driver);
         rnd = new Random();
     }
 
+    //    public FluentWait wait;
     public WebDriver driver;
-    public WebDriverWait wait;
+    public Wait wait;
     public Actions actions;
     public Random rnd;
 
@@ -82,11 +91,11 @@ public class BasePage {
 
     public void retryingFindClick(WebElement webElement) {
         int attempts = 0;
-        while(attempts < 2) {
+        while (attempts < 2) {
             try {
                 webElement.click();
                 break;
-            } catch(StaleElementReferenceException e) {
+            } catch (StaleElementReferenceException e) {
             }
             attempts++;
         }

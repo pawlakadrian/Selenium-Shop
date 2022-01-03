@@ -32,6 +32,9 @@ public class CreateAccountPage extends BasePage {
     @FindBy(css = ".form-control-submit")
     private WebElement save;
 
+    @FindBy(css = ".form-footer button")
+    private WebElement continueBtn;
+
     public CreateAccountPage(WebDriver driver) {
         super(driver);
     }
@@ -68,6 +71,12 @@ public class CreateAccountPage extends BasePage {
 
     public CreateAccountPage saveNewAccount() {
         save.click();
+        return this;
+    }
+
+    public CreateAccountPage continueNewAccount() {
+        jsScrollIntoViewElement(continueBtn);
+        continueBtn.click();
         return this;
     }
 }
