@@ -13,6 +13,7 @@ import java.math.BigDecimal;
 import java.time.Duration;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class BasePage {
     private Logger logger = LoggerFactory.getLogger(BasePage.class);
@@ -20,7 +21,8 @@ public class BasePage {
     public BasePage(WebDriver driver) {
         PageFactory.initElements(driver, this);
         this.driver = driver;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+//        wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         actions = new Actions(driver);
         rnd = new Random();
     }
@@ -50,7 +52,7 @@ public class BasePage {
 
     public void clickObject(WebElement element) {
         try {
-            wait.until(ExpectedConditions.elementToBeClickable(element));
+//            wait.until(ExpectedConditions.elementToBeClickable(element));
             element.click();
         } catch (TimeoutException e) {
             e.printStackTrace();

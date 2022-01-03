@@ -25,6 +25,14 @@ public class ConfirmationPage extends BasePage{
     @FindBy(css = "#order-details li:nth-child(1)")
     private WebElement referenceNumber;
 
+    @FindBy(css = "#content-hook_payment_return > div > div > div > dl > dd:nth-child(2)")
+    private WebElement totalAmount;
+
+    public String totalAmount() {
+        jsScrollIntoViewElement(this.totalAmount);
+        return this.totalAmount.getText();
+    }
+
     public String getShippingMethod() {
         return shippingMethod.getText();
     }
@@ -52,7 +60,7 @@ public class ConfirmationPage extends BasePage{
     }
 
     public String confirmationMsg() {
-        waitForWebElementToBeVisible(confirmationMsg);
+//        waitForWebElementToBeVisible(confirmationMsg);
         return confirmationMsg.getText();
     }
 

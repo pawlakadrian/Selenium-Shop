@@ -52,7 +52,7 @@ public class AddressesFormPage extends BasePage{
     }
 
     public AddressesFormPage confirmAddresses() {
-        waitForWebElementToBeVisible(continueBtn);
+//        waitForWebElementToBeVisible(continueBtn);
         clickObject(continueBtn);
         return this;
     }

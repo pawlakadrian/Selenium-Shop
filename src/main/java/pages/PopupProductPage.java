@@ -70,7 +70,7 @@ public class PopupProductPage extends BasePage{
     }
 
     public void goToPopup() {
-        waitForWebElementToBeVisible(popup);
+//        waitForWebElementToBeVisible(popup);
         driver.switchTo().activeElement();
     }
 }
