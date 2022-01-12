@@ -3,13 +3,13 @@ environmentModel:
     url: http://automationpractice.com/
     title: Blouses - My Store
     active: N
-    browser: FIREFOX
+    webbrowser: FIREFOX
 
   stag:
     url: http://146.59.32.4/index.php
     title: TesterSii
     active: Y
-    browser: CHROME
+    webbrowser: CHROME
 
     # data for failed login test
     emailFailed: wrong@wp.pl

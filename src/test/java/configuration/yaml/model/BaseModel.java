@@ -1,48 +1,31 @@
 package configuration.yaml.model;
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 public class BaseModel {
-    private String url;
-    private String title;
     private String active;
-    private String browser;
-    private String emailFailed;
-    private String passwordFailed;
-    private String emailSuccess;
-    private String passwordSuccess;
+
+    Map<String, Object> properties = new LinkedHashMap<>();
+
+    @JsonAnySetter
+    void setProperties(String key, Object value) {
+        properties.put(key, value);
+    }
+    @JsonAnyGetter
+    public Map<String, Object> getProperties() {
+        return properties;
+    }
 
     public BaseModel() {
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public String getTitle() {
-        return title;
     }
 
     public String getActive() {
         return active;
     }
 
-    public String getEmailFailed() {
-        return emailFailed;
-    }
-
-    public String getPasswordFailed() {
-        return passwordFailed;
-    }
-
-    public String getEmailSuccess() {
-        return emailSuccess;
-    }
-
-    public String getPasswordSuccess() {
-        return passwordSuccess;
-    }
-
-    public String getBrowser() {
-        return browser;
-    }
 }
 

@@ -39,7 +39,7 @@ public class TestBase {
         loadProperties = new LoadProperties();
         loadProperties.setProperties();
         yamlReader = new YamlReader();
-        browser = Browser.valueOf(yamlReader.getYamlConfig().getEnvironmentModel().choseActiveEnvironment().getBrowser());
+        browser = Browser.valueOf(System.getProperty("webbrowser"));
         driverFactory = new DriverFactory();
         WebDriverManager.chromedriver().setup();
         logger.debug("Webdriver initialized");

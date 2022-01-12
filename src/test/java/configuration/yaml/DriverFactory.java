@@ -19,9 +19,9 @@ public class DriverFactory {
 
     private YamlReader yamlReader;
 
-    public WebDriver getDriver(Browser browser) {
+    public WebDriver getDriver(Browser webbrowser) {
 
-        switch (browser.toString()) {
+        switch (webbrowser.toString()) {
             case "CHROME":
                 ChromeOptions optionsChrome = new ChromeOptions();
                 WebDriverManager.chromedriver().setup();

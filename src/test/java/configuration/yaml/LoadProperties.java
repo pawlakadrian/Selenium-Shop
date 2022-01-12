@@ -1,18 +1,22 @@
 package configuration.yaml;
 
 import configuration.yaml.model.BaseModel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.Map;
 
 public class LoadProperties {
+    Logger logger = LoggerFactory.getLogger(LoadProperties.class);
     YamlReader yamlReader = new YamlReader();
     public BaseModel environment = yamlReader.getYamlConfig().getEnvironmentModel().choseActiveEnvironment();
 
     public void setProperties() {
-        System.setProperty("url", environment.getUrl());
-        System.setProperty("title", environment.getTitle());
-        System.setProperty("browser", environment.getBrowser());
-        System.setProperty("emailFailed", environment.getEmailFailed());
-        System.setProperty("passwordFailed", environment.getPasswordFailed());
-        System.setProperty("emailSuccess", environment.getEmailSuccess());
-        System.setProperty("passwordSuccess", environment.getPasswordSuccess());
+        Map<String, Object> dataBaseProperties = environment.getProperties();
+        for (Map.Entry entry : dataBaseProperties.entrySet()) {
+            System.setProperty(entry.getKey().toString(), entry.getValue().toString());
+            logger.info("Loaded property: {} = {}", entry.getKey().toString(), entry.getValue().toString());
+        }
+        logger.info("Loaded properties total: {}", dataBaseProperties.size());
     }
 }
