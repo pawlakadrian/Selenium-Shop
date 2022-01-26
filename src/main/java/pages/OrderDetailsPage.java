@@ -5,11 +5,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class OrderDetailsPage extends BasePage{
+public class OrderDetailsPage extends BasePage {
 
     @FindBy(css = "#order-products tbody tr")
     List<WebElement> productsListOnOrderDetails;
@@ -29,7 +28,10 @@ public class OrderDetailsPage extends BasePage{
     }
 
     public List<OrderDetailsLinePage> getListOfProductsInOrderDetails() {
-        return productsListOnOrderDetails.stream().map(product -> new OrderDetailsLinePage(product, driver)).collect(Collectors.toList());
+        return productsListOnOrderDetails
+                .stream()
+                .map(product -> new OrderDetailsLinePage(product, driver))
+                .collect(Collectors.toList());
     }
 
     public Basket getCurrentBasket() {
