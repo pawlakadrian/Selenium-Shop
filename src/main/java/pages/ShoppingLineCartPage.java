@@ -21,7 +21,7 @@ public class ShoppingLineCartPage extends BasePage{
     @FindBy(css = ".product-line-info a")
     private WebElement productName;
 
-    @FindBy(css = ".current-price [itemprop='price']")
+    @FindBy(css = ".current-price .price")
     private WebElement productPrice;
 
     @FindBy(css = ".js-cart-line-product-quantity")
