@@ -31,13 +31,13 @@ public final class UserBuilder {
             throw new IllegalStateException("Name cannot be empty");
         }
         if (lastName.isEmpty()) {
-            throw new IllegalStateException("Levels cannot be empty");
+            throw new IllegalStateException("Last name cannot be empty");
         }
         if (email.isEmpty()) {
-            throw new IllegalStateException("Levels cannot be empty");
+            throw new IllegalStateException("Email cannot be empty");
         }
         if (password.isEmpty()) {
-            throw new IllegalStateException("Levels cannot be empty");
+            throw new IllegalStateException("Password cannot be empty");
         }
 
         User user = new User();
