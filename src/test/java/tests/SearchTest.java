@@ -1,13 +1,11 @@
 package tests;
 
 import helpers.TestBase;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import pages.ListOfThumbnailsProductsPage;
 import pages.MenuPage;
-import pages.SearchPage;
 import pages.SingleThumbnailProductPage;
 
 import java.util.List;
@@ -15,8 +13,8 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
+@Slf4j
 public class SearchTest extends TestBase {
-    Logger logger = LoggerFactory.getLogger(SearchPage.class);
 
     @Test
     @DisplayName("Search random product")
@@ -36,7 +34,7 @@ public class SearchTest extends TestBase {
         String productNameOnSearchPage = listOfProductsOnSearchPage.get(0).getTitleOfProduct();
 
         assertThat(randomProductName, equalTo(productNameOnSearchPage));
-        logger.info("Search random product finished.");
+        log.info("Search random product finished.");
     }
 
     @Test
@@ -54,6 +52,6 @@ public class SearchTest extends TestBase {
                 .getHint();
 
         assertThat(randomProductName, equalTo(menuPage.getHint()));
-        logger.info("Search random product finished.");
+        log.info("Search random product finished.");
     }
 }

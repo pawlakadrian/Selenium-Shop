@@ -29,8 +29,7 @@ public class ListOfThumbnailsProductsPage extends BasePage{
     }
 
     public SingleThumbnailProductPage getRandomProduct() {
-        Random rnd = new Random();
-        return getListOfProducts().get(rnd.nextInt(getListOfProducts().size()));
+        return getRandomElement(getListOfProducts());
     }
 
     public void goToRandomProduct() {

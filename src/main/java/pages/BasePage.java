@@ -30,7 +30,7 @@ public class BasePage {
     public Actions actions;
     public Random rnd;
 
-    public WebElement getRandomElement(List<WebElement> elements) {
+    public <T> T getRandomElement(List<T> elements) {
         return elements.get(rnd.nextInt(elements.size()));
     }
 

@@ -1,6 +1,7 @@
 package tests;
 
 import helpers.TestBase;
+import lombok.extern.slf4j.Slf4j;
 import models.Basket;
 import models.OrderDetails;
 import models.User;
@@ -8,15 +9,13 @@ import models.UserFactory;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import pages.*;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
+@Slf4j
 public class BasketAndCheckoutTest extends TestBase {
-    Logger logger = LoggerFactory.getLogger(SearchPage.class);
 
     @Test
     @DisplayName("Product successfully added to shopping cart")
@@ -31,11 +30,11 @@ public class BasketAndCheckoutTest extends TestBase {
             menuPage
                     .goToRandomCategory();
 //                    .goToClothes(); //uncomment for debug, comment line above
-            logger.info("Go to random category");
+            log.info("Go to random category");
 
             listOfThumbnailsProductsPage
                     .goToRandomProduct();
-            logger.info("Choose random product.");
+            log.info("Choose random product.");
 
             int randomQuantity = getRandomInt(5) + 1;
 
@@ -76,11 +75,11 @@ public class BasketAndCheckoutTest extends TestBase {
             menuPage
                     .goToRandomCategory();
 //                    .goToClothes(); //uncomment for debug, comment line above
-            logger.info("Go to random category");
+            log.info("Go to random category");
 
             listOfThumbnailsProductsPage
                     .goToRandomProduct();
-            logger.info("Choose random product.");
+            log.info("Choose random product.");
 
             int randomQuantity = getRandomInt(5) + 1;
 
@@ -170,11 +169,11 @@ public class BasketAndCheckoutTest extends TestBase {
             menuPage
                     .goToRandomCategory();
 //                    .goToClothes(); //uncomment for debug, comment line above
-            logger.info("Go to random category");
+            log.info("Go to random category");
 
             listOfThumbnailsProductsPage
                     .goToRandomProduct();
-            logger.info("Choose random product.");
+            log.info("Choose random product.");
 
             int randomQuantity = getRandomInt(3) + 1;
 

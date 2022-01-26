@@ -1,19 +1,17 @@
 package tests;
 
 import helpers.TestBase;
-import models.UserFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import pages.LoginPage;
 import pages.MenuPage;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
+@Slf4j
 public class LoginTest extends TestBase {
-    Logger logger = LoggerFactory.getLogger(LoginTest.class);
 
     @Test
     @DisplayName("Failed login test")
@@ -31,7 +29,7 @@ public class LoginTest extends TestBase {
 
         String validationMsg = "Authentication failed.";
         assertThat(validationMsg, equalTo(loginPage.loginFailMsg()));
-        logger.info("Test Login failed finished.");
+        log.info("Test Login failed finished.");
     }
 
     @Test
@@ -48,16 +46,16 @@ public class LoginTest extends TestBase {
                 .signIn();
 
         assertThat(menuPage.verifyUserIsLogged(), equalTo("Test User"));
-        logger.info("Test Login successful - verify user is logged.");
+        log.info("Test Login successful - verify user is logged.");
 
         menuPage
                 .logout();
-        logger.info("Logout user");
+        log.info("Logout user");
 
         assertThat(menuPage.verifyUserIsLoggedOut(), equalTo("Sign in"));
-        logger.info("Check user is logged out.");
+        log.info("Check user is logged out.");
 
-        logger.info("Test Login with successful finished.");
+        log.info("Test Login with successful finished.");
 
     }
 

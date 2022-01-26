@@ -1,10 +1,9 @@
 package tests;
 
 import helpers.TestBase;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import pages.*;
 
 import java.util.ArrayList;
@@ -13,8 +12,8 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
+@Slf4j
 public class ProductAndCategoriesTest extends TestBase {
-    Logger logger = LoggerFactory.getLogger(SearchPage.class);
 
     @Test
     @DisplayName("Test of categories")
@@ -24,12 +23,12 @@ public class ProductAndCategoriesTest extends TestBase {
 
         for (int i = 0; i < menuPage.getCategories().size(); i++){
             menuPage.getCategories().get(i).click();
-            logger.info("click on category {}", menuPage.getCategories().get(i).getText());
+            log.info("click on category {}", menuPage.getCategories().get(i).getText());
             menuPage.waitUntilElementIsVisible(categoryPage.getTitle());
             categoryPage.getTitle();
-            logger.info("get title from category {}", categoryPage.getTitle().getText());
+            log.info("get title from category {}", categoryPage.getTitle().getText());
             assertThat(menuPage.getCategories().get(i).getText(), equalTo(categoryPage.getTitle().getText()));
-            logger.info("assert that clicked category is equal to category on page");
+            log.info("assert that clicked category is equal to category on page");
         }
     }
 
@@ -51,7 +50,7 @@ public class ProductAndCategoriesTest extends TestBase {
         filterPage
                 .selectFilterFirst();
         for (SingleThumbnailProductPage listOfProduct : listOfThumbnailsProductsPage.getListOfProducts()) {
-            logger.info("Searched products by filter: {}", listOfProduct.getTitleOfProduct());
+            log.info("Searched products by filter: {}", listOfProduct.getTitleOfProduct());
             listOfProductWeDisplay.add(listOfProduct.getTitleOfProduct());
         }
         assertThat(listOfProductWeDisplay, equalTo(listOfProductWeExpected));
@@ -74,26 +73,26 @@ public class ProductAndCategoriesTest extends TestBase {
         assertThat(onSalePage.getTitle(), equalTo("ON SALE"));
 
         for (SingleThumbnailProductPage listOfProduct : listOfThumbnailsProductsPage.getListOfProducts()) {
-            logger.info("List of products with discount: {}", listOfProduct.getTitleOfProduct());
+            log.info("List of products with discount: {}", listOfProduct.getTitleOfProduct());
             assertThat(listOfProduct.isDiscount(), equalTo(true));
             assertThat(listOfProduct.isRegularPrice(), equalTo(true));
             assertThat(listOfProduct.isDiscountPrice(), equalTo(true));
             assertThat(listOfProduct.checkPriceWithDiscount(), equalTo(true));
         }
-        logger.info("Assertion checked all item has a discount sign, regular and discount price.");
+        log.info("Assertion checked all item has a discount sign, regular and discount price.");
 
         listOfThumbnailsProductsPage
                 .goToRandomProduct();
         productPage
                 .isDisplayDiscountLabel();
         assertThat(productPage.isDisplayDiscountLabel(), equalTo(true));
-        logger.info("Assertion checked label discount on product page.");
+        log.info("Assertion checked label discount on product page.");
 
         assertThat(productPage.isDiscountPrice(), equalTo(true));
         assertThat(productPage.isRegularPrice(), equalTo(true));
-        logger.info("Assertion checked two prices (discount + regular) on product page.");
+        log.info("Assertion checked two prices (discount + regular) on product page.");
 
         assertThat(productPage.checkPriceWithDiscount(), equalTo(true));
-        logger.info("Assertion checked actual price is 20% lower than regular");
+        log.info("Assertion checked actual price is 20% lower than regular");
     }
 }
